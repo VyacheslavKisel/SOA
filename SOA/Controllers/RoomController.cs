@@ -22,20 +22,20 @@ namespace SOA.Controllers
 
         [HttpGet]
         [Route("rooms")]
-        public IEnumerable<Room> GetRooms()
+        public ActionResult<IEnumerable<Room>> GetRooms()
         {
             var rooms = _database.Rooms;
 
-            return rooms;
+            return Ok(rooms);
         }
 
         [HttpGet]
         [Route("rooms/{id}")]
-        public Room GetRoom(int id)
+        public ActionResult<Room> GetRoom(int id)
         {
             var room = _database.Rooms.Find(id);
 
-            return room;
+            return Ok(room);
         }
 
         [HttpPost]
