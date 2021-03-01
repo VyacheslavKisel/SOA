@@ -18,6 +18,24 @@ namespace SOA.Controllers
         public RoomController(DatabaseContext database)
         {
             _database = database;
+
+            if (!_database.Rooms.Any())
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    var room = new Room
+                    {
+                        Id = i + 1,
+                        Number = i + 101,
+                        Price = 300 + (i * 25),
+                        Volume = "On two person"
+                    };
+
+                    database.Rooms.Add(room);
+                }
+            }
+
+            _database.SaveChanges();
         }
 
         [HttpGet]
@@ -30,7 +48,7 @@ namespace SOA.Controllers
         }
 
         [HttpGet]
-        [Route("rooms/{id}")]
+        [Route("room/{id}")]
         public ActionResult<Room> GetRoom(int id)
         {
             var room = _database.Rooms.Find(id);
@@ -39,7 +57,7 @@ namespace SOA.Controllers
         }
 
         [HttpPost]
-        [Route("rooms/new")]
+        [Route("room/new")]
         public IActionResult AddRoom([FromBody] Room room)
         {
             _database.Add(room);

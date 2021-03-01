@@ -27,7 +27,8 @@ namespace SOA
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureSqlServer(services);
+            //ConfigureSqlServer(services);
+            services.AddDbContext<DatabaseContext>(context => { context.UseInMemoryDatabase("RoomDb"); });
 
             services.AddControllers();
         }
