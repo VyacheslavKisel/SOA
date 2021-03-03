@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SOA.Database.Configurations;
 using SOA.Models;
 using System;
 using System.Collections.Generic;
@@ -17,12 +16,5 @@ namespace SOA.Database
         }
 
         public DbSet<Room> Rooms { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfiguration(new RoomConfiguration());
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
